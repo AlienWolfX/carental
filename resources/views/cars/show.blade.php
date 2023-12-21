@@ -2,123 +2,159 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-    <!-- Scripts -->
-    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
-
-    <!-- Favicons -->
-    <link href="{{ asset('assets/img/favicon.png" rel="icon') }}" />
-
-
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet" />
-    <!-- Include the flatpickr library -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-    <!-- Vendor CSS Files -->
-    <link href="{{ asset('assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Template Main CSS File -->
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
-
+    @include('head')
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
 <body>
-    <div id="app">
-        <!-- ======= Header ======= -->
-        <header id="header" class="fixed-top d-flex align-items-center header-inner-pages">
-            <div class="container d-flex align-items-center justify-content-between">
-                <h1 class="logo"><a href="index.html">ALLUC </a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href=index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center header-inner-pages">
+        <div class="container d-flex align-items-center justify-content-between">
 
-                <nav id="navbar" class="navbar">
-                    <ul>
-                        <li><a class="nav-link scrollto" href="{{ route('home') }}">Home</a></li>
-                    </ul>
-                    <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav>
+            <h1 class="logo"><a href="{{ route('home') }}">ALLUC</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href=index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto " href="{{ route('home') }}">Home</a></li>
+                    <li><a class="active" href="{{ route('carss') }}">Cars</a></li>
+                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                </ul>
+            </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+
+    <main id="main">
+
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+
+                <ol>
+                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="#">{{ $car->car_name }}</a></li>
+                </ol>
+                <h2>{{ $car->car_name }} details</h2>
 
             </div>
-        </header>
+        </section><!-- End Breadcrumbs -->
 
-        <main class="py-4" id="main">
-            <section id="breadcrumbs" class="breadcrumbs">
-                <div class="container">
-                    <ol>
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li>{{$car->car_name}}</li>
-                    </ol>
-                    <h2>{{$car->car_name}}</h2>
-                </div>
-            </section>
+        <!-- ======= Blog Single Section ======= -->
+        <section id="blog" class="blog">
+            <div class="container" data-aos="fade-up">
 
-            <section id="portfolio-details" class="portfolio-details">
-                <div class="container">
-                    <div class="row gy-4">
-                        <div class="container">
-                            <div class="row">
+                <div class="row">
 
-                                @if ($car)
-                                    <div class="col-lg-8">
-                                        <img src="{{ asset('storage/' . $car->image) }}" alt="{{ $car->car_name }}"
-                                            style="width: 500px; height: 300px; object-fit: cover;" />
-                                    </div>
+                    <div class="col-lg-8 entries">
 
-                                    <div class="col-lg-4">
-                                        <div class="portfolio-info">
-                                            <h3>Car Information</h3>
-                                            <ul>
-                                                <li><strong>Plate Number</strong>: {{ $car->plate_number }}</li>
-                                                <li><strong>Car Name</strong>: {{ $car->car_name }}</li>
-                                                <li><strong>Description</strong>: {{ $car->description }}</li>
-                                                <li><strong>Model Year</strong>: {{ $car->car_model_year }}</li>
-                                                <li><strong>Color</strong>: {{ $car->color }}</li>
-                                                <li><strong>Rate</strong>: {{ $car->rate }}</li>
-                                                <li><strong>Status</strong>: {{ $car->status }}</li>
-                                            </ul>
-                                            <br>
-                                            <div style="display: flex; justify-content: center; align-items: center;">
-                                                <button id="bookNowButton" class="btn btn-primary">Book Now</button>
-                                                <input type="text" id="bookingDateTime" style="display: none;">
-                                            </div>
-                                        </div>
+                        <article class="entry entry-single">
+                            <div id="datepicker"></div>
+                            <div class="entry-img">
+                                <img src="{{ asset('storage/' . $car->image) }}" alt="{{ $car->car_name }}"
+                                    class="img-fluid">
+                            </div>
 
-                                    </div>
-                                @else
-                                    <div class="col-lg-12">
-                                        <p>Car not found.</p>
-                                    </div>
-                                @endif
+                            <h2 class="entry-title">
+                                <a href="#">{{ $car->car_name }}</a>
+                            </h2>
+
+                            <div class="entry-meta">
+                                <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
+                                            href="#">{{ $car->staff->first_name }}</a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
+                                            href="#"><time
+                                                datetime="{{ $car->created_at }}">{{ $car->created_at->format('M d, Y') }}</time></a>
+                                    </li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-geo"></i> <a
+                                            href="#">{{ $car->location }}</a></li>
+                                </ul>
+                            </div>
+                            <h5 class="entry-meta">Rate:</h5>
+                            <form method="POST" action="{{ route('car.review') }}">
+                                @csrf
+                                <div class="rating">
+                                    <input type="hidden" name="car_id" value="{{ $car->car_id }}">
+                                    <input type="radio" name="star" id="star1" value="1"><label
+                                        for="star1"></label>
+                                    <input type="radio" name="star" id="star2" value="2"><label
+                                        for="star2"></label>
+                                    <input type="radio" name="star" id="star3" value="3"><label
+                                        for="star3"></label>
+                                    <input type="radio" name="star" id="star4" value="4"><label
+                                        for="star4"></label>
+                                    <input type="radio" name="star" id="star5" value="5"><label
+                                        for="star5"></label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                            </form>
+                            <div>
 
                             </div>
-                        </div>
-                    </div>
+
+                            <br>
+                            <div class="entry-content">
+                                <p>
+                                    {{ $car->description }}
+                                </p>
+
+                                <ul>
+                                    <li><strong>Plate Number:</strong> {{ $car->plate_number }}</li>
+                                    <li><strong>Model Year:</strong> {{ $car->car_model_year }}</li>
+                                    <li><strong>Color:</strong> {{ $car->color }}</li>
+                                    <li><strong>Rate:</strong> {{ $car->rate }}</li>
+                                    <li><strong>Status:</strong> {{ $car->status }}</li>
+                                </ul>
+
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-warning text-light"
+                                        style="background-color: #f6b024;"> <a href="{{ route('bookings') }}}}"
+                                            class="text-light">Book Now!</a></button>
+                                </div>
+                            </div>
+                        </article><!-- End blog entry -->
+                    </div><!-- End blog entries list -->
+
+                    <div class="col-lg-4">
+
+                        <div class="sidebar">
+
+                            <h3 class="sidebar-title">Search</h3>
+                            <div class="sidebar-item search-form">
+                                <form action="{{ route('car.search') }}" method="GET">
+                                    <input type="text" name="query">
+                                    <button type="submit"><i class="bi bi-search"></i></button>
+                                </form>
+                            </div><!-- End sidebar search formn-->
+
+                            <h3 class="sidebar-title">Categories</h3>
+                            <div class="sidebar-item categories">
+                                <ul>
+                                    @php
+                                        $categories = ['SEDAN', 'SUV', 'PICKUP', 'CITY CAR', 'UTILITY VEHICLE'];
+                                    @endphp
+
+                                    @foreach ($categories as $category)
+                                        @php
+                                            $count = \App\Models\Car::where('category', $category)->count();
+                                        @endphp
+                                        <li><a href="{{ route('category.cars', ['category' => $category]) }}">{{ $category }}
+                                                <span>({{ $count }})</span></a></li>
+                                    @endforeach
+                                </ul>
+                            </div><!-- End sidebar categories-->
+                        </div><!-- End sidebar -->
+
+                    </div><!-- End blog sidebar -->
+
                 </div>
-            </section>
-            @include('layouts.resources.footer')
-        </main>
+
+            </div>
+        </section><!-- End Blog Single Section -->
+
+    </main><!-- End #main -->
 
 
     </div>
@@ -133,17 +169,14 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        document.getElementById('bookNowButton').addEventListener('click', function() {
-            flatpickr('#bookingDateTime', {
-                enableTime: true,
-                dateFormat: "Y-m-d H:i",
-            }).open();
-        });
+
     </script>
 
 </body>

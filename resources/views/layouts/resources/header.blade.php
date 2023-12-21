@@ -8,7 +8,7 @@
             <ul>
                 @auth
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#portfolio">Cars</a></li>
+                    <li><a class="nav-link scrollto" href="{{ route('carss')}}">Cars</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                 @endauth
 
