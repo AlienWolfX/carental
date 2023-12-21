@@ -20,6 +20,24 @@
                     <li><a class="nav-link scrollto " href="{{ route('home') }}">Home</a></li>
                     <li><a class="active" href="{{ route('carss') }}">Cars</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                                 document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
                 </ul>
             </nav><!-- .navbar -->
 
@@ -33,7 +51,7 @@
             <div class="container">
 
                 <ol>
-                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('carss') }}">Cars</a></li>
                     <li><a href="#">{{ $car->car_name }}</a></li>
                 </ol>
                 <h2>{{ $car->car_name }} details</h2>
@@ -110,7 +128,7 @@
 
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-warning text-light"
-                                        style="background-color: #f6b024;"> <a href="{{ route('bookings') }}}}"
+                                        style="background-color: #f6b024;"> <a href=""
                                             class="text-light">Book Now!</a></button>
                                 </div>
                             </div>

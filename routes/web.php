@@ -39,5 +39,3 @@ Route::get('/car/search', [CarController::class, 'search'])->name('car.search');
 Route::get('/category/{category}/cars', [CarController::class, 'categoryCars'])->name('category.cars');
 Route::get('/recent-cars', [CarController::class, 'recentCars'])->name('recent.cars');
 Route::post('/car/review', [CarController::class, 'review'])->name('car.review');
-
-Route::get('/bookings', [BookController::class, 'index'])->name('bookings');
