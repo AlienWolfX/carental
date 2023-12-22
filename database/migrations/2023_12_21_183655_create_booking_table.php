@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('availability', function (Blueprint $table) {
-            $table->unsignedBigInteger('car_id');
-            $table->foreign('car_id')->references('car_id')->on('cars');
-            $table->date('available_date');
+        Schema::create('booking', function (Blueprint $table) {
+            $table->id('booking_id');
+            $table->date('date');
+            $table->timestamps();
         });
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('availability');
+        Schema::dropIfExists('booking');
     }
 };

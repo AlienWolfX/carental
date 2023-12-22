@@ -38,7 +38,7 @@
                             style="margin-top: 20px; width: 100%;padding: 7px;"
                             onclick="createToken()">PAY $10
                         </button>
-                    <form>
+                    </form>
 
                 </div>
             </div>

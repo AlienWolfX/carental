@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('availability', function (Blueprint $table) {
-            $table->time('time')->nullable();
+        Schema::table('cars', function (Blueprint $table) {
+            $table->date('date')->nullable();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('availability', function (Blueprint $table) {
-            $table->dropColumn('time');
+        Schema::table('cars', function (Blueprint $table) {
+            //
         });
     }
 };

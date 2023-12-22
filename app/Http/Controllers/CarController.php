@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Models\CarReview;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CarController extends Controller
 {
@@ -40,14 +41,6 @@ class CarController extends Controller
     {
         $cars = Car::where('category', $category)->get();
         return view('cars.carss', ['cars' => $cars]);
-    }
-
-    public function recentCars()
-    {
-        $recentCars = Car::orderBy('created_at', 'desc')
-            ->take(3)
-            ->get();
-        return view('cars.carss', ['recentCars' => $recentCars]);
     }
 
     public function review(Request $request)

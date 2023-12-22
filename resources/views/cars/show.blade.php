@@ -126,11 +126,41 @@
                                     <li><strong>Status:</strong> {{ $car->status }}</li>
                                 </ul>
 
-                                <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn btn-warning text-light"
-                                        style="background-color: #f6b024;"> <a href=""
-                                            class="text-light">Book Now!</a></button>
-                                </div>
+                                <!-- Add this table -->
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Available Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $car->date }}</td>
+                                            <td>
+                                                <div class="d-flex justify-content-end">
+                                                    <form action="{{ route('stripe.post') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="car_id" value="{{ $car->car_id }}">
+                                                        <input type="hidden" name="car_name" value="{{ $car->car_name }}">
+                                                        <input type="hidden" name="car_rate" value="{{ $car->rate }}">
+                                                        <input type="hidden" name="car_date" value="{{ $car->date }}">
+                                                        <script
+                                                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                                            data-key="{{ env('STRIPE_KEY') }}"
+                                                            data-amount="{{ $car->rate * 100 }}"
+                                                            data-name="{{ $car->car_name }}"
+                                                            data-description="Payment for {{ $car->car_name }}"
+                                                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                                            data-locale="auto"
+                                                            data-currency="php">
+                                                        </script>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </article><!-- End blog entry -->
                     </div><!-- End blog entries list -->
